@@ -35,7 +35,10 @@ elif raza == 2:
 elif raza == 3:
     dano = 20
     hp = 70
-p1 = pj(nom, dano, hp)
+elif raza == 9:
+    dano = 50
+    hp = 200
+p1 = pj(nom, hp, dano)
 p1.stats()
 time.sleep(1)
 inventario = []
