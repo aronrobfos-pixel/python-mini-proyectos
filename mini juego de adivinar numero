@@ -1,6 +1,6 @@
 import random
 numsecreto = random.randint(1,100)
-intentos = 2
+intentos = 5
 
 while intentos > 0:
     numusuario = int(input("pone un numero: "))
