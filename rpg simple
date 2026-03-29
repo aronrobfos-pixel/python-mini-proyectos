@@ -1,0 +1,140 @@
+import random
+import time
+
+class pj:
+    def __init__(self, nombre, hp, dano):
+        self.nombre = nombre
+        self.hp = hp
+        self.dano = dano
+
+    def stats(self):
+        print(f"{self.nombre} Tiene {self.hp} de vida y {self.dano} de daño")
+
+    def ataque(self, objetivo):
+        golpe = self.dano * round(random.triangular(0.5, 2.0, 1.0), 1)
+
+        objetivo.hp -= golpe
+        print(f"{self.nombre} ataca a {objetivo.nombre} y le quita {golpe} de HP")
+
+nom = input("Tu nombre es?: ")
+while True:
+    try:
+        print("1. Duende")
+        print("2. Humano")
+        print("3. Ogro")
+        raza = int(input("Eres un?: "))
+        break
+    except:
+        print()
+if raza == 1:
+    dano = 7
+    hp = 40
+elif raza == 2:
+    dano = 10
+    hp = 100
+elif raza == 3:
+    dano = 20
+    hp = 70
+p1 = pj(nom, dano, hp)
+p1.stats()
+time.sleep(1)
+inventario = []
+cosas = ["pocion", "espada"]
+
+while p1.hp > 0:
+
+    enemigos = [
+    pj("Slime", 15, 5),
+    pj("Slime", 15, 5),
+    pj("Duende", 30, 10),
+    pj("Duende", 30, 10),
+    pj("Duende", 30, 10),
+    pj("Duende", 30, 10),
+    pj("Ogro", 50, 20),
+    pj("Ogro", 50, 20),
+    pj("Dragon", 80, 30)
+]
+    enemigo = random.choice(enemigos)
+    loot = random.randint(1,3)
+    if loot == 1:
+        loote = random.choice(cosas)
+        inventario.append(loote)
+        print(f"Encontraste {loote} y se agrego al inventario")
+        time.sleep(1)
+
+    enemigo.stats()
+    time.sleep(1)
+    while p1.hp >= 1:
+        while True:
+            try:
+                print("Que Haras?")
+                print("1. Atacar")
+                print("2. Estadisticas jugador")
+                print("3. Estadisticas enemigo")
+                print("4. Inventario")
+                print("5. Huir")
+                accion = int(input())
+                if accion == 1 or accion == 2 or accion == 3 or accion == 4 or accion == 5:
+                    break
+            except:
+                print("Pone un numero")
+                time.sleep(1)
+
+        if accion == 1:
+            p1.ataque(enemigo)
+            time.sleep(1)
+        elif accion == 2:
+            p1.stats()
+            time.sleep(1)
+        elif accion == 3:
+            enemigo.stats()
+            time.sleep(1)
+        elif accion == 4:
+            while True:
+                try:
+                    for i,cosa in enumerate(inventario):
+                        print(i +1,".", cosa)
+                    print("9 . volver")
+                    usar = int(input("Que Haras?: "))
+                    usar -= 1
+                    if usar == 8:
+                        break
+                    elif usar >= len(inventario):
+                        print("Numero invalido")
+                        time.sleep(1)
+                        continue
+                    seleccion = inventario[usar]
+                    if seleccion == "pocion":
+                        inventario.pop(usar)
+                        print("Jugador usa pocion y se cura 40 de hp")
+                        p1.hp += 40
+                        p1.stats()
+                        time.sleep(1)
+                    if seleccion == "espada":
+                        inventario.pop(usar)
+                        print("jugador se equipa una espada")
+                        p1.dano += 10
+                        time.sleep(1)
+                except:
+                    print("Invalido")
+        elif accion == 5:
+            Huir = random.randint(1,2)
+            if Huir == 1:
+                print("Lograste Escapar")
+                time.sleep(1)
+                break
+            else:
+                print("no lograste escapar")
+                enemigo.ataque(p1)
+                time.sleep(1)
+            
+        if enemigo.hp <= 0:
+            print("El enemigo a muerto")
+            time.sleep(2)
+            break
+        else:
+            if accion == 1:
+                enemigo.ataque(p1)
+                time.sleep(1)
+
+print("Has Muerto")
