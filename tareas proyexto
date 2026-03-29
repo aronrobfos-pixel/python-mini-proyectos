@@ -1,0 +1,31 @@
+tareas = []
+
+while True:
+    print("1. Agregar tarea")
+    print("2. Ver tareas")
+    print("3. Completar tarea")
+    print("4. Eliminar tarea")
+    print("5. Salir")
+    usuario = input()
+    if usuario == "1":
+        print("pone la nueva tarea")
+        nuevat = input()
+        tareas.append(nuevat)
+    elif usuario == "2":
+        for i,tarea in enumerate(tareas):
+            print(i+1, ".", tarea)
+        usuario = input("voler?")
+    elif usuario == "3":
+        for i,tarea in enumerate(tareas):
+            print(i+1, ".", tarea)
+        eleccion = int(input("que tarea completo?: "))
+        indice = eleccion - 1
+        tareas[indice] = "✔ " + tareas[indice]
+    elif usuario == "4":
+        for i,tarea in enumerate(tareas):
+            print(i+1, ".", tarea)
+        eleccion = int(input("que tarea borrar?: "))
+        indice = eleccion - 1
+        tareas.pop(indice)
+    elif usuario == "5":
+        break
