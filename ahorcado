@@ -1,0 +1,160 @@
+import random
+
+words = ["perro", "gato", "casa", "mesa", "silla", "puerta", "ventana", "cielo", "mar", "arena",
+          "sol", "luna", "estrella", "nube", "lluvia", "viento", "fuego", "hielo", "rio", "bosque",
+            "flor", "arbol", "hoja", "fruta", "manzana", "banana", "uva", "pera", "pan", "leche",
+              "queso", "huevo", "cafe", "mate", "azucar", "sal", "dulce", "amargo", "ropa", "camisa",
+                "pantalon", "zapato", "gorra", "abrigo", "cama", "almohada", "sueño", "juego",
+                  "pelota", "viaje", "ruta", "auto", "tren", "avion", "barco", "playa", "ciudad",
+                    "pueblo", "calle", "plaza", "amigo", "familia", "hermano", "madre", "padre",
+                      "niño", "joven", "adulto", "viejo", "feliz", "triste", "rapido", "lento",
+                      "grande", "chico", "nuevo", "viejo", "rico", "pobre", "fuerte", "debil",
+                        "claro", "oscuro", "ruido", "silencio", "musica", "baile", "cine", "libro",
+                          "historia", "secreto", "misterio"]
+
+Jugador = []
+espacios = []
+letras = 0
+lugar = 0
+vidas = 7
+cont = 0
+WordSec = random.choice(words)
+for i in WordSec:
+        espacios.append("_")
+
+fase1 = """
+     +---+
+
+   |   |
+
+       |
+
+       |
+
+       |
+
+       |
+
+   =========
+ """
+
+fase2 = """
+     +---+
+
+   |   |
+
+   O   |
+
+       |
+
+       |
+
+       |
+
+   =========
+ """
+
+fase3 = """
+     +---+
+
+   |   |
+
+   O   |
+
+   |   |
+
+       |
+
+       |
+
+   =========
+"""
+
+fase4 = """
+
+     +---+
+
+   |   |
+
+   O   |
+
+  /|   |
+
+       |
+
+       |
+
+   =========
+ """
+
+fase5 = """
+     +---+
+
+   |   |
+
+   O   |
+
+  /|\  |
+
+       |
+
+       |
+
+   =========
+ """
+fase6 = """
+     +---+
+
+   |   |
+
+   O   |
+
+  /|\  |
+
+  /    |
+
+       |
+
+   =========
+"""
+fase7 = """
+     +---+
+
+   |   |
+
+   O   |
+
+  /|\  |
+
+  / \  |
+
+       |
+
+   =========
+ """
+while True:
+    rep = 0
+    fases = [fase1,fase2,fase3,fase4,fase5,fase6,fase7]
+    print(fases[7-vidas])
+    lugar = -1
+    print(" ".join(espacios))
+    print("")
+    print(" ".join(Jugador))
+    LetrasJugador = input("Pone Tu Letra: ").lower()
+    if LetrasJugador not in Jugador:
+        Jugador.append(LetrasJugador)
+    for i in WordSec:
+        lugar += 1
+        if LetrasJugador == i:
+            espacios[lugar] = LetrasJugador
+    if LetrasJugador not in WordSec:
+        vidas -=1
+    if vidas == 1:
+        print (fase7)
+        print("PERDISTE")
+        print(f"la palabra era: {(WordSec)}")
+        break
+    if "_" not in espacios:
+        print(" ".join(espacios))
+        print("GANASTE")
+        break
